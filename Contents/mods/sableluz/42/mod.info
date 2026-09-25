@@ -1,6 +1,7 @@
 name=Sable de Luz
 id=sableluz
-modversion=1.0.0
-description=Sable de luz fuerte. Build 42.
+modversion=1.1.0
+versionMin=42.15.0
+description=Sable de luz que brilla de verdad, con cristal kyber, empunadura, recetas, reparacion y loot. Build 42.
 poster=poster.png
 icon=icon.png

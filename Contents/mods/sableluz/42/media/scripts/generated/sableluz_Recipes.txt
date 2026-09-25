@@ -1,0 +1,79 @@
+module SL
+{
+    imports
+    {
+        Base,
+    }
+
+    /* 1) Empunadura: un tubo de metal como cuerpo, electronica y cable para el emisor. */
+    craftRecipe SLArmarEmpunadura
+    {
+        timedAction = MakingElectrical,
+        time = 300,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:2,
+        xpAward = Electricity:15,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [Base.MetalPipe],
+            item 2 [Base.ElectronicsScrap],
+            item 1 [Base.ElectricWire],
+            item 1 [Base.DuctTape],
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraSable,
+        }
+    }
+
+    /* 2) Sable: empunadura + cristal + dos baterias para encenderlo. */
+    craftRecipe SLEnsamblarSable
+    {
+        timedAction = MakingElectrical,
+        time = 400,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:3,
+        xpAward = Electricity:30,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraSable],
+            item 1 [SL.CristalKyber],
+            item 2 [Base.Battery] mode:destroy,
+        }
+
+        outputs
+        {
+            item 1 SL.SableLuz,
+        }
+    }
+
+    /* 3) Desarmar: recuperar la empunadura y el cristal (para cambiar de cristal/color). */
+    craftRecipe SLDesarmarSable
+    {
+        timedAction = MakingElectrical,
+        time = 200,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:1,
+        xpAward = Electricity:5,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.SableLuz] mode:destroy,
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraSable,
+            item 1 SL.CristalKyber,
+        }
+    }
+}
