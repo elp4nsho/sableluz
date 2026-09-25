@@ -1,0 +1,12 @@
+module SL
+{
+    imports
+    {
+        Base,
+    }
+    model SableLuz
+    {
+        mesh = weapons/2handed/SableLuz,
+        texture = weapons/2handed/SableLuz,
+    }
+}

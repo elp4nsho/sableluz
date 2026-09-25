@@ -1,0 +1,43 @@
+module Base
+{
+    sound SableLuzHit
+    {
+        category = Item,
+        clip
+        {
+            file = media/sound/SableLuzHit.wav,
+            distanceMax = 15,
+            volume = 1.0,
+        }
+    }
+    sound SableLuzSwing
+    {
+        category = Item,
+        clip
+        {
+            file = media/sound/SableLuzHit.wav,
+            distanceMax = 25,
+            volume = 1.0,
+        }
+    }
+    sound SableLuzBreak
+    {
+        category = Item,
+        clip
+        {
+            file = media/sound/SableLuzHit.wav,
+            distanceMax = 15,
+            volume = 1.0,
+        }
+    }
+    sound SableLuzDrop
+    {
+        category = Item,
+        clip
+        {
+            file = media/sound/SableLuzHit.wav,
+            distanceMax = 15,
+            volume = 1.0,
+        }
+    }
+}
