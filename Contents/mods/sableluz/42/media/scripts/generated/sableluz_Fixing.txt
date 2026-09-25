@@ -1,0 +1,16 @@
+module SL
+{
+    imports
+    {
+        Base,
+    }
+
+    /* Reparar: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix Sable de Luz
+    {
+        Require : SableLuz,
+
+        Fixer : Battery; Electricity=2,
+        Fixer : ElectronicsScrap=2; Electricity=3,
+    }
+}

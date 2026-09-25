@@ -4,23 +4,27 @@ module SL
     {
         Base,
     }
+
+    /* El sable. Mismo golpe 'fuerte' de la v1.0, pero ya no se rompe a los ~20 golpes
+       (antes perdia durabilidad en CADA golpe) y el swing es menos lento. */
     item SableLuz
     {
         DisplayCategory = Weapon,
         ItemType = base:weapon,
-        Weight = 1.5,
+        Weight = 1.2,
         Icon = SableLuz,
+        Tooltip = Tooltip_SL_SableLuz,
         AttachmentType = Sword,
         BaseSpeed = 1.0,
         BreakSound = SableLuzBreak,
         Categories = LongBlade,
-        ConditionLowerChanceOneIn = 1,
-        ConditionMax = 20,
+        ConditionLowerChanceOneIn = 30,
+        ConditionMax = 30,
         CritDmgMultiplier = 9,
         CriticalChance = 35.0,
         DamageCategory = Slash,
         DamageMakeHole = true,
-        DoorDamage = 8,
+        DoorDamage = 12,
         DoorHitSound = SableLuzHit,
         DropSound = SableLuzDrop,
         HitAngleMod = -30.0,
@@ -35,20 +39,40 @@ module SL
         MinAngle = -0.3,
         MinDamage = 8,
         MinRange = 0.21,
-        MinimumSwingTime = 3.0,
+        MinimumSwingTime = 2.2,
         PushBackMod = 0.5,
         RunAnim = Run_Weapon2,
         SubCategory = Swinging,
         SwingAmountBeforeImpact = 0.02,
         SwingAnim = Bat,
         SwingSound = SableLuzSwing,
-        SwingTime = 3.0,
+        SwingTime = 2.2,
         Tags = base:ignorezombiedensity;base:hasmetal;base:fullblade,
-        TreeDamage = 1,
+        TreeDamage = 8,
         TwoHandWeapon = true,
         WeaponLength = 0.4,
         WeaponSprite = SL.SableLuz,
         Sharpness = 5.0,
-        OnBreak = OnBreak.Katana,
+    }
+
+    /* El corazon del sable. Raro: joyerias, casas de empeno, antiguedades, laboratorios. */
+    item CristalKyber
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 0.1,
+        Icon = CristalKyber,
+        Tooltip = Tooltip_SL_CristalKyber,
+    }
+
+    /* Empunadura sin cristal: se arma con chatarra electronica o se encuentra (replicas de
+       coleccion en tiendas de comics, prototipos en laboratorios y el ejercito). */
+    item EmpunaduraSable
+    {
+        DisplayCategory = Electronics,
+        ItemType = base:normal,
+        Weight = 0.8,
+        Icon = EmpunaduraSable,
+        Tooltip = Tooltip_SL_EmpunaduraSable,
     }
 }
