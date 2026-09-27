@@ -22,12 +22,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, 'tools'))
 
 import icons      # noqa: E402
+import sounds     # noqa: E402
 import saber      # noqa: E402
 import xfile      # noqa: E402
 
 OUT = os.path.join(HERE, 'Contents', 'mods', 'sableluz', '42')
 MEDIA = os.path.join(OUT, 'media')
-VERSION = '1.1.0'
+VERSION = '1.2.0'
 
 # Color del cristal (y de la hoja). Mas adelante: mas colores = mas cristales.
 RED = (255, 30, 24)
@@ -44,48 +45,39 @@ def write(path, content):
 
 # --------------------------------------------------------------------------- sonido
 def package_sound():
+    """El 'vuuum' del swing es el audio original del mod (sable_sonido.mp3); el resto se sintetiza
+    (tools/sounds.py): zumbido en loop, encendido, apagado y choque."""
     snd_dir = os.path.join(MEDIA, 'sound')
-    wav = os.path.join(snd_dir, 'SableLuzHit.wav')
+    sounds.write_all(snd_dir)
+    wav = os.path.join(snd_dir, 'SableLuzSwing.wav')
     if os.path.exists(wav):
-        return 'media/sound/SableLuzHit.wav'
+        return
     src = os.path.join(HERE, 'sable_sonido.mp3')
-    if not os.path.exists(src):
-        return None
-    os.makedirs(snd_dir, exist_ok=True)
     for cmd in (['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-ac', '1', '-ar', '44100', wav],
                 ['afconvert', '-f', 'WAVE', '-d', 'LEI16@44100', '-c', '1', src, wav]):
         try:
             subprocess.run(cmd, check=True, capture_output=True)
-            return 'media/sound/SableLuzHit.wav'
+            return
         except Exception:
             continue
-    return None
+    raise SystemExit('No se pudo convertir sable_sonido.mp3 (instala ffmpeg)')
 
 
-SOUNDS = """module Base
-{
-    sound SableLuzHit
-    {
-        category = Item,
-        clip { file = %(f)s, distanceMax = 15, volume = 1.0, }
-    }
-    sound SableLuzSwing
-    {
-        category = Item,
-        clip { file = %(f)s, distanceMax = 20, volume = 0.8, }
-    }
-    sound SableLuzBreak
-    {
-        category = Item,
-        clip { file = %(f)s, distanceMax = 15, volume = 1.0, }
-    }
-    sound SableLuzDrop
-    {
-        category = Item,
-        clip { file = %(f)s, distanceMax = 10, volume = 0.6, }
-    }
-}
-"""
+def _sound(name, wav, dist, vol, loop=False):
+    return ('    sound %s\n    {\n        category = Item,\n%s'
+            '        clip { file = media/sound/%s.wav, distanceMax = %d, volume = %.2f, }\n    }\n'
+            % (name, '        loop = true,\n' if loop else '', wav, dist, vol))
+
+
+SOUNDS = ('module Base\n{\n'
+          + _sound('SableLuzSwing', 'SableLuzSwing', 20, 0.8)
+          + _sound('SableLuzHit', 'SableLuzClash', 18, 1.0)
+          + _sound('SableLuzBreak', 'SableLuzOff', 15, 1.0)
+          + _sound('SableLuzDrop', 'SableLuzOff', 10, 0.5)
+          + _sound('SableLuzOn', 'SableLuzOn', 15, 0.9)
+          + _sound('SableLuzOff', 'SableLuzOff', 15, 0.8)
+          + _sound('SableLuzHum', 'SableLuzHum', 8, 0.35, loop=True)
+          + '}\n')
 
 # --------------------------------------------------------------------------- items
 ITEMS = """module SL
@@ -329,47 +321,84 @@ Events.OnPreDistributionMerge.Add(addLoot)
 ''' % rows
 
 
-LIGHT_LUA = '''-- Sable de Luz: el sable encendido en la mano ilumina con su color alrededor de quien lo lleva.
--- Se usa una luz de cell (addLamppost) que sigue al jugador casilla a casilla.
+LIGHT_LUA = '''-- Sable de Luz encendido: mientras alguien lo tiene en la mano
+--   * ilumina con su color alrededor (una luz de cell que lo sigue casilla a casilla)
+--   * zumba (loop) y suena al encenderse / apagarse
 -- Generado por build_sableluz.py.
 
 local SABER = "SL.SableLuz"
 local R, G, B = %(r).2f, %(g).2f, %(b).2f
 local RADIUS = %(rad)d
 
-local lights = {}
+local state = {}      -- jugador -> { light, x, y, z, hum }
+
+local function isSaber(item)
+    return item and item:getFullType() == SABER and item:getCondition() > 0
+end
 
 local function holding(player)
     if not player or player:isDead() then return false end
-    for _, item in ipairs({ player:getPrimaryHandItem(), player:getSecondaryHandItem() }) do
-        if item and item:getFullType() == SABER and item:getCondition() > 0 then
-            return true
-        end
-    end
-    return false
+    -- ojo: ipairs({a, b}) se corta en el primer nil; se revisan las dos manos por separado
+    return isSaber(player:getPrimaryHandItem()) or isSaber(player:getSecondaryHandItem())
 end
 
-local function removeLight(key)
-    local d = lights[key]
-    if d then
+local function emitter(player)
+    local ok, e = pcall(function() return player:getEmitter() end)
+    return ok and e or nil
+end
+
+local function play(player, name)
+    local e = emitter(player)
+    if not e then return nil end
+    local ok, id = pcall(function() return e:playSound(name) end)
+    return ok and id or nil
+end
+
+local function removeLight(d)
+    if d.light then
         pcall(function() getCell():removeLamppost(d.light) end)
-        lights[key] = nil
+        d.light = nil
     end
+end
+
+local function switchOff(player, d, sound)
+    removeLight(d)
+    if d.hum then
+        local e = emitter(player)
+        if e then pcall(function() e:stopSound(d.hum) end) end
+        d.hum = nil
+    end
+    if sound then play(player, "SableLuzOff") end
+    state[player] = nil
 end
 
 local function update(player)
-    if holding(player) then
-        local x, y, z = math.floor(player:getX()), math.floor(player:getY()), math.floor(player:getZ())
-        local d = lights[player]
-        if not d or d.x ~= x or d.y ~= y or d.z ~= z then
-            removeLight(player)
-            local ok, light = pcall(function() return getCell():addLamppost(x, y, z, R, G, B, RADIUS) end)
-            if ok and light then
-                lights[player] = { light = light, x = x, y = y, z = z }
-            end
+    local d = state[player]
+    if not holding(player) then
+        if d then switchOff(player, d, not player:isDead()) end
+        return
+    end
+    if not d then                                   -- recien encendido
+        d = {}
+        state[player] = d
+        play(player, "SableLuzOn")
+    end
+    -- luz: se mueve cuando cambia la casilla
+    local x, y, z = math.floor(player:getX()), math.floor(player:getY()), math.floor(player:getZ())
+    if not d.light or d.x ~= x or d.y ~= y or d.z ~= z then
+        removeLight(d)
+        local ok, light = pcall(function() return getCell():addLamppost(x, y, z, R, G, B, RADIUS) end)
+        if ok and light then d.light, d.x, d.y, d.z = light, x, y, z end
+    end
+    -- zumbido: si termino (o el juego no lo repite solo), se vuelve a lanzar
+    local e = emitter(player)
+    if e then
+        local playing = false
+        if d.hum then
+            local ok, p = pcall(function() return e:isPlaying(d.hum) end)
+            playing = ok and p
         end
-    else
-        removeLight(player)
+        if not playing then d.hum = play(player, "SableLuzHum") end
     end
 end
 
@@ -398,19 +427,23 @@ local function onTick()
         seen[p] = true
         update(p)
     end
-    for key in pairs(lights) do
-        if not seen[key] then removeLight(key) end
+    for p, d in pairs(state) do
+        if not seen[p] then switchOff(p, d, false) end
     end
 end
 
--- al guardar se apagan (se vuelven a encender solas en el siguiente tick)
+-- al guardar se quitan las luces (para que no queden grabadas en el mapa); el siguiente tick las
+-- vuelve a poner. El estado se mantiene: no suena de nuevo el encendido y el zumbido sigue.
 local function clearAll()
-    for key in pairs(lights) do removeLight(key) end
+    for _, d in pairs(state) do removeLight(d) end
 end
 
 Events.OnTick.Add(onTick)
 Events.OnSave.Add(clearAll)
-Events.OnPlayerDeath.Add(function(player) removeLight(player) end)
+Events.OnPlayerDeath.Add(function(player)
+    local d = state[player]
+    if d then switchOff(player, d, false) end
+end)
 ''' % dict(r=LIGHT_RGB[0], g=LIGHT_RGB[1], b=LIGHT_RGB[2], rad=LIGHT_RADIUS)
 
 # --------------------------------------------------------------------------- textos
@@ -484,17 +517,16 @@ def main():
     saber.make_poster(os.path.join(HERE, 'preview.png'), RED, size=512)
 
     # scripts
-    snd = package_sound()
+    package_sound()
     gen = os.path.join(MEDIA, 'scripts', 'generated')
-    if snd:
-        write(os.path.join(gen, 'sableluz_Sounds.txt'), SOUNDS % {'f': snd})
+    write(os.path.join(gen, 'sableluz_Sounds.txt'), SOUNDS)
     write(os.path.join(gen, 'sableluz_Items.txt'), ITEMS)
     write(os.path.join(gen, 'sableluz_Models.txt'), MODELS)
     write(os.path.join(gen, 'sableluz_Recipes.txt'), RECIPES)
     write(os.path.join(gen, 'sableluz_Fixing.txt'), FIXING)
 
     # lua
-    write(os.path.join(MEDIA, 'lua', 'client', 'SableLuz_Light.lua'), LIGHT_LUA)
+    write(os.path.join(MEDIA, 'lua', 'client', 'SableLuz_Encendido.lua'), LIGHT_LUA)
     write(os.path.join(MEDIA, 'lua', 'server', 'Items', 'SableLuz_Distributions.lua'), loot_lua())
 
     # traducciones

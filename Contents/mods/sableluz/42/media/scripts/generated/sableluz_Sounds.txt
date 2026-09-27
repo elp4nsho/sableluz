@@ -1,23 +1,39 @@
 module Base
 {
-    sound SableLuzHit
-    {
-        category = Item,
-        clip { file = media/sound/SableLuzHit.wav, distanceMax = 15, volume = 1.0, }
-    }
     sound SableLuzSwing
     {
         category = Item,
-        clip { file = media/sound/SableLuzHit.wav, distanceMax = 20, volume = 0.8, }
+        clip { file = media/sound/SableLuzSwing.wav, distanceMax = 20, volume = 0.80, }
+    }
+    sound SableLuzHit
+    {
+        category = Item,
+        clip { file = media/sound/SableLuzClash.wav, distanceMax = 18, volume = 1.00, }
     }
     sound SableLuzBreak
     {
         category = Item,
-        clip { file = media/sound/SableLuzHit.wav, distanceMax = 15, volume = 1.0, }
+        clip { file = media/sound/SableLuzOff.wav, distanceMax = 15, volume = 1.00, }
     }
     sound SableLuzDrop
     {
         category = Item,
-        clip { file = media/sound/SableLuzHit.wav, distanceMax = 10, volume = 0.6, }
+        clip { file = media/sound/SableLuzOff.wav, distanceMax = 10, volume = 0.50, }
+    }
+    sound SableLuzOn
+    {
+        category = Item,
+        clip { file = media/sound/SableLuzOn.wav, distanceMax = 15, volume = 0.90, }
+    }
+    sound SableLuzOff
+    {
+        category = Item,
+        clip { file = media/sound/SableLuzOff.wav, distanceMax = 15, volume = 0.80, }
+    }
+    sound SableLuzHum
+    {
+        category = Item,
+        loop = true,
+        clip { file = media/sound/SableLuzHum.wav, distanceMax = 8, volume = 0.35, }
     }
 }

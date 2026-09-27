@@ -29,11 +29,25 @@ Pega fuerte (8–14, crítico 35 %, corta hasta 10 zombis por golpe), a dos mano
 v1.1: ya no se rompe a los ~20 golpes (antes perdía durabilidad en *cada* golpe), swing más rápido
 (3.0 → 2.2), un poco más liviano (1.5 → 1.2).
 
-## La luz
+## Encendido: luz y sonido
 
-`media/lua/client/SableLuz_Light.lua` pone una luz roja (radio 4) en la casilla de cada jugador que
-tenga el sable en la mano, y la mueve con él. Funciona en solo y en multijugador (cada cliente ilumina
-a los jugadores que ve). Se apaga al guardarlo, al soltarlo o si se rompe (condición 0).
+`media/lua/client/SableLuz_Encendido.lua`, mientras alguien tiene el sable en la mano:
+
+- pone una **luz roja** (radio 4) en su casilla y la mueve con él;
+- suena el **encendido** al empuñarlo, un **zumbido** en loop mientras lo tiene y el **apagado** al
+  guardarlo, soltarlo o si se rompe (condición 0).
+
+Funciona en solo y en multijugador (cada cliente ilumina y hace sonar a los jugadores que ve). El
+zumbido sale solo por los parlantes: no atrae zombis.
+
+| Sonido | Cuándo | Origen |
+|---|---|---|
+| `SableLuzSwing` | cada golpe al aire | el audio original del mod (`sable_sonido.mp3`) |
+| `SableLuzHit` | al pegarle a algo | choque chisporroteante (sintetizado) |
+| `SableLuzOn` / `SableLuzOff` | encender / apagar, soltar o romperse | sintetizado |
+| `SableLuzHum` | zumbido en loop | sintetizado, loop sin cortes |
+
+Los sonidos sintetizados salen de `tools/sounds.py` (numpy): se regeneran con el build.
 
 ## Compatibilidad
 
