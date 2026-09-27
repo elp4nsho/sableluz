@@ -41,14 +41,36 @@ def profile():
 
 
 def v_of(y):
-    """Posicion vertical en la textura (DirectX: v=0 arriba)."""
+    """Posicion vertical en la textura (DirectX: v=0 arriba). Simetrica: v_of(-y) == v_of(y),
+    asi el sable doble (que usa y negativos para la mitad de abajo) puede reusar la misma
+    textura de un sable sencillo sin cambios."""
+    y = abs(y)
     if y <= HILT_TOP:
         return 1.0 - (y / HILT_TOP) * (1.0 - HILT_V)
     return HILT_V * (1.0 - (y - HILT_TOP) / (BLADE_TIP - HILT_TOP))
 
 
-def build_mesh(n_around=24):
-    prof = profile()
+def profile_double():
+    """Perfil del sable de doble hoja (como el de Darth Maul): dos hojas+emisor+empunadura
+    que se unen por el medio en un collar corto (se salta la punta del pomo de cada mitad,
+    asi no queda un 'pellizco' al centro; ver v_of_double para la textura)."""
+    half = profile()[1:]                                  # sin la punta del pomo (y=0, r chico)
+    bottom = [(-y, r, lab) for y, r, lab in reversed(half)]
+    return bottom + half
+
+
+def v_of_double(y):
+    """v de la textura PROPIA del sable doble (make_texture_double): monotona de punta a punta,
+    cada mitad ocupa la mitad de la imagen (ver make_texture_double)."""
+    if y >= 0:
+        return v_of(y) * 0.5
+    return 1.0 - v_of(-y) * 0.5
+
+
+def build_mesh(prof=None, n_around=24, v_of_fn=v_of):
+    """Malla de torno a partir de un perfil [(y, radio, etiqueta)]. Por omision, el sable
+    sencillo (profile()); para el doble se pasa profile_double() y v_of_fn=v_of_double."""
+    prof = profile() if prof is None else prof
     verts, normals, uvs, faces = [], [], [], []
     ring_start = []
     for i, (y, r, _) in enumerate(prof):
@@ -64,21 +86,25 @@ def build_mesh(n_around=24):
             c, s = math.cos(ang), math.sin(ang)
             verts.append((r * c, y, r * s))
             normals.append((nr * c, ny_, nr * s))
-            uvs.append((a / n_around, v_of(y)))
+            uvs.append((a / n_around, v_of_fn(y)))
     for i in range(len(prof) - 1):
         for a in range(n_around):
             i00, i01 = ring_start[i] + a, ring_start[i] + a + 1
             i10, i11 = ring_start[i + 1] + a, ring_start[i + 1] + a + 1
             faces.append((i00, i10, i11))
             faces.append((i00, i11, i01))
-    # tapas
+    # tapas (en el doble: las dos puntas de hoja; no hay tapa al centro)
     for ring, y, ny, sign in ((0, prof[0][0], -1.0, -1), (len(prof) - 1, prof[-1][0], 1.0, 1)):
         ci = len(verts)
-        verts.append((0.0, y, 0.0)); normals.append((0.0, ny, 0.0)); uvs.append((0.5, v_of(y)))
+        verts.append((0.0, y, 0.0)); normals.append((0.0, ny, 0.0)); uvs.append((0.5, v_of_fn(y)))
         for a in range(n_around):
             p0, p1 = ring_start[ring] + a, ring_start[ring] + a + 1
             faces.append((ci, p1, p0) if sign < 0 else (ci, p0, p1))
     return verts, faces, normals, uvs
+
+
+def build_mesh_double(n_around=24):
+    return build_mesh(profile_double(), n_around, v_of_fn=v_of_double)
 
 
 def _band_rows(S):
@@ -153,7 +179,24 @@ def make_texture(path, color=(255, 30, 24), S=256):
         for k in range(8):
             x = int((k + 0.5) / 8 * S)
             d.rectangle([x - 3, y0 + 3, x + 3, y1 - 3], fill=(40, 40, 46))
-    im.save(path)
+    if path:
+        im.save(path)
+    return im
+
+
+def make_texture_double(path, color_top=(255, 30, 24), color_bottom=None, S=256):
+    """Textura del sable de doble hoja: dos texturas de sable sencillo (una por color),
+    comprimidas cada una a la mitad de alto y unidas al centro (ver v_of_double). Si las
+    dos hojas son del mismo color (lo comun) es indistinguible de un solo color parejo;
+    con colores distintos da un sable 'bicolor'."""
+    color_bottom = color_bottom or color_top
+    top = make_texture(None, color_top, S=S).resize((S, S // 2), Image.LANCZOS)
+    bot = make_texture(None, color_bottom, S=S).transpose(Image.FLIP_TOP_BOTTOM).resize((S, S // 2), Image.LANCZOS)
+    im = Image.new('RGBA', (S, S))
+    im.paste(top, (0, 0))
+    im.paste(bot, (0, S // 2))
+    if path:
+        im.save(path)
     return im
 
 

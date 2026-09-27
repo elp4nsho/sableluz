@@ -5,12 +5,129 @@ module SL
         Base,
     }
 
-    /* Reparar: cambiar las baterias o reemplazar componentes quemados. */
-    fixing Fix Sable de Luz
+    /* Reparar SableLuz: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuz
     {
         Require : SableLuz,
 
-        Fixer : Battery; Electricity=2,
+        Fixer : Battery=1; Electricity=2,
         Fixer : ElectronicsScrap=2; Electricity=3,
+    }
+
+    /* Reparar SableLuzDoble: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuzDoble
+    {
+        Require : SableLuzDoble,
+
+        Fixer : Battery=2; Electricity=2,
+        Fixer : ElectronicsScrap=3; Electricity=3,
+    }
+
+    /* Reparar SableLuz_Blue: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuz_Blue
+    {
+        Require : SableLuz_Blue,
+
+        Fixer : Battery=1; Electricity=2,
+        Fixer : ElectronicsScrap=2; Electricity=3,
+    }
+
+    /* Reparar SableLuzDoble_Blue: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuzDoble_Blue
+    {
+        Require : SableLuzDoble_Blue,
+
+        Fixer : Battery=2; Electricity=2,
+        Fixer : ElectronicsScrap=3; Electricity=3,
+    }
+
+    /* Reparar SableLuz_Green: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuz_Green
+    {
+        Require : SableLuz_Green,
+
+        Fixer : Battery=1; Electricity=2,
+        Fixer : ElectronicsScrap=2; Electricity=3,
+    }
+
+    /* Reparar SableLuzDoble_Green: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuzDoble_Green
+    {
+        Require : SableLuzDoble_Green,
+
+        Fixer : Battery=2; Electricity=2,
+        Fixer : ElectronicsScrap=3; Electricity=3,
+    }
+
+    /* Reparar SableLuz_Purple: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuz_Purple
+    {
+        Require : SableLuz_Purple,
+
+        Fixer : Battery=1; Electricity=2,
+        Fixer : ElectronicsScrap=2; Electricity=3,
+    }
+
+    /* Reparar SableLuzDoble_Purple: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuzDoble_Purple
+    {
+        Require : SableLuzDoble_Purple,
+
+        Fixer : Battery=2; Electricity=2,
+        Fixer : ElectronicsScrap=3; Electricity=3,
+    }
+
+    /* Reparar SableLuz_Yellow: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuz_Yellow
+    {
+        Require : SableLuz_Yellow,
+
+        Fixer : Battery=1; Electricity=2,
+        Fixer : ElectronicsScrap=2; Electricity=3,
+    }
+
+    /* Reparar SableLuzDoble_Yellow: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuzDoble_Yellow
+    {
+        Require : SableLuzDoble_Yellow,
+
+        Fixer : Battery=2; Electricity=2,
+        Fixer : ElectronicsScrap=3; Electricity=3,
+    }
+
+    /* Reparar SableLuz_Orange: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuz_Orange
+    {
+        Require : SableLuz_Orange,
+
+        Fixer : Battery=1; Electricity=2,
+        Fixer : ElectronicsScrap=2; Electricity=3,
+    }
+
+    /* Reparar SableLuzDoble_Orange: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuzDoble_Orange
+    {
+        Require : SableLuzDoble_Orange,
+
+        Fixer : Battery=2; Electricity=2,
+        Fixer : ElectronicsScrap=3; Electricity=3,
+    }
+
+    /* Reparar SableLuz_White: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuz_White
+    {
+        Require : SableLuz_White,
+
+        Fixer : Battery=1; Electricity=2,
+        Fixer : ElectronicsScrap=2; Electricity=3,
+    }
+
+    /* Reparar SableLuzDoble_White: cambiar las baterias o reemplazar componentes quemados. */
+    fixing Fix SableLuzDoble_White
+    {
+        Require : SableLuzDoble_White,
+
+        Fixer : Battery=2; Electricity=2,
+        Fixer : ElectronicsScrap=3; Electricity=3,
     }
 }

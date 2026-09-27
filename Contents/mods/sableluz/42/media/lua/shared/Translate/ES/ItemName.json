@@ -1,5 +1,25 @@
 {
-    "SL.SableLuz": "Sable de Luz",
-    "SL.CristalKyber": "Cristal Kyber (rojo)",
-    "SL.EmpunaduraSable": "Empuñadura de Sable de Luz"
+    "SL.EmpunaduraSable": "Empuñadura de Sable de Luz",
+    "SL.EmpunaduraDobleSable": "Empuñadura de Sable de Doble Hoja",
+    "SL.CristalKyber": "Cristal Kyber (Rojo)",
+    "SL.SableLuz": "Sable de Luz (Rojo)",
+    "SL.SableLuzDoble": "Sable de Luz de Doble Hoja (Rojo)",
+    "SL.CristalKyber_Blue": "Cristal Kyber (Azul)",
+    "SL.SableLuz_Blue": "Sable de Luz (Azul)",
+    "SL.SableLuzDoble_Blue": "Sable de Luz de Doble Hoja (Azul)",
+    "SL.CristalKyber_Green": "Cristal Kyber (Verde)",
+    "SL.SableLuz_Green": "Sable de Luz (Verde)",
+    "SL.SableLuzDoble_Green": "Sable de Luz de Doble Hoja (Verde)",
+    "SL.CristalKyber_Purple": "Cristal Kyber (Púrpura)",
+    "SL.SableLuz_Purple": "Sable de Luz (Púrpura)",
+    "SL.SableLuzDoble_Purple": "Sable de Luz de Doble Hoja (Púrpura)",
+    "SL.CristalKyber_Yellow": "Cristal Kyber (Amarillo)",
+    "SL.SableLuz_Yellow": "Sable de Luz (Amarillo)",
+    "SL.SableLuzDoble_Yellow": "Sable de Luz de Doble Hoja (Amarillo)",
+    "SL.CristalKyber_Orange": "Cristal Kyber (Naranja)",
+    "SL.SableLuz_Orange": "Sable de Luz (Naranja)",
+    "SL.SableLuzDoble_Orange": "Sable de Luz de Doble Hoja (Naranja)",
+    "SL.CristalKyber_White": "Cristal Kyber (Blanco)",
+    "SL.SableLuz_White": "Sable de Luz (Blanco)",
+    "SL.SableLuzDoble_White": "Sable de Luz de Doble Hoja (Blanco)"
 }

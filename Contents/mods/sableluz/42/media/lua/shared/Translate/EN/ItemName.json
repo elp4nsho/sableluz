@@ -1,5 +1,25 @@
 {
-    "SL.SableLuz": "Lightsaber",
+    "SL.EmpunaduraSable": "Lightsaber Hilt",
+    "SL.EmpunaduraDobleSable": "Double-Bladed Lightsaber Hilt",
     "SL.CristalKyber": "Kyber Crystal (Red)",
-    "SL.EmpunaduraSable": "Lightsaber Hilt"
+    "SL.SableLuz": "Lightsaber (Red)",
+    "SL.SableLuzDoble": "Double-Bladed Lightsaber (Red)",
+    "SL.CristalKyber_Blue": "Kyber Crystal (Blue)",
+    "SL.SableLuz_Blue": "Lightsaber (Blue)",
+    "SL.SableLuzDoble_Blue": "Double-Bladed Lightsaber (Blue)",
+    "SL.CristalKyber_Green": "Kyber Crystal (Green)",
+    "SL.SableLuz_Green": "Lightsaber (Green)",
+    "SL.SableLuzDoble_Green": "Double-Bladed Lightsaber (Green)",
+    "SL.CristalKyber_Purple": "Kyber Crystal (Purple)",
+    "SL.SableLuz_Purple": "Lightsaber (Purple)",
+    "SL.SableLuzDoble_Purple": "Double-Bladed Lightsaber (Purple)",
+    "SL.CristalKyber_Yellow": "Kyber Crystal (Yellow)",
+    "SL.SableLuz_Yellow": "Lightsaber (Yellow)",
+    "SL.SableLuzDoble_Yellow": "Double-Bladed Lightsaber (Yellow)",
+    "SL.CristalKyber_Orange": "Kyber Crystal (Orange)",
+    "SL.SableLuz_Orange": "Lightsaber (Orange)",
+    "SL.SableLuzDoble_Orange": "Double-Bladed Lightsaber (Orange)",
+    "SL.CristalKyber_White": "Kyber Crystal (White)",
+    "SL.SableLuz_White": "Lightsaber (White)",
+    "SL.SableLuzDoble_White": "Double-Bladed Lightsaber (White)"
 }

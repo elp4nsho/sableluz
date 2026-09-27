@@ -1,5 +1,25 @@
 {
-    "Tooltip_SL_SableLuz": "Glows when held. Repair it with batteries or scrap electronics.",
+    "Tooltip_SL_EmpunaduraSable": "An empty hilt. It needs a crystal and power to ignite.",
+    "Tooltip_SL_EmpunaduraDobleSable": "A long hilt with an emitter on each end. Needs two crystals and power.",
     "Tooltip_SL_CristalKyber": "A warm, humming red crystal. The heart of a lightsaber.",
-    "Tooltip_SL_EmpunaduraSable": "An empty hilt. It needs a crystal and power to ignite."
+    "Tooltip_SL_SableLuz": "Glows red when held. Repair it with batteries or scrap electronics.",
+    "Tooltip_SL_SableLuzDoble": "Two red blades, one hilt. Heavier and slower, hits everything around you.",
+    "Tooltip_SL_CristalKyber_Blue": "A warm, humming blue crystal. The heart of a lightsaber.",
+    "Tooltip_SL_SableLuz_Blue": "Glows blue when held. Repair it with batteries or scrap electronics.",
+    "Tooltip_SL_SableLuzDoble_Blue": "Two blue blades, one hilt. Heavier and slower, hits everything around you.",
+    "Tooltip_SL_CristalKyber_Green": "A warm, humming green crystal. The heart of a lightsaber.",
+    "Tooltip_SL_SableLuz_Green": "Glows green when held. Repair it with batteries or scrap electronics.",
+    "Tooltip_SL_SableLuzDoble_Green": "Two green blades, one hilt. Heavier and slower, hits everything around you.",
+    "Tooltip_SL_CristalKyber_Purple": "A warm, humming purple crystal. The heart of a lightsaber.",
+    "Tooltip_SL_SableLuz_Purple": "Glows purple when held. Repair it with batteries or scrap electronics.",
+    "Tooltip_SL_SableLuzDoble_Purple": "Two purple blades, one hilt. Heavier and slower, hits everything around you.",
+    "Tooltip_SL_CristalKyber_Yellow": "A warm, humming yellow crystal. The heart of a lightsaber.",
+    "Tooltip_SL_SableLuz_Yellow": "Glows yellow when held. Repair it with batteries or scrap electronics.",
+    "Tooltip_SL_SableLuzDoble_Yellow": "Two yellow blades, one hilt. Heavier and slower, hits everything around you.",
+    "Tooltip_SL_CristalKyber_Orange": "A warm, humming orange crystal. The heart of a lightsaber.",
+    "Tooltip_SL_SableLuz_Orange": "Glows orange when held. Repair it with batteries or scrap electronics.",
+    "Tooltip_SL_SableLuzDoble_Orange": "Two orange blades, one hilt. Heavier and slower, hits everything around you.",
+    "Tooltip_SL_CristalKyber_White": "A warm, humming white crystal. The heart of a lightsaber.",
+    "Tooltip_SL_SableLuz_White": "Glows white when held. Repair it with batteries or scrap electronics.",
+    "Tooltip_SL_SableLuzDoble_White": "Two white blades, one hilt. Heavier and slower, hits everything around you."
 }
