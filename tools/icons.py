@@ -68,6 +68,30 @@ def hilt_icon():
     return _finish(im)
 
 
+def double_saber_icon(color=(255, 30, 24), color2=None):
+    """Sable de doble hoja: dos hojas que salen en direcciones opuestas de una empunadura
+    central (como el de Darth Maul). color2 permite un sable bicolor."""
+    im = Image.new('RGBA', (W, W), (0, 0, 0, 0))
+    mid_a, mid_b = (W * 0.32, W * 0.64), (W * 0.68, W * 0.36)   # extremos de la empunadura
+    tip_a, tip_b = (W * 0.04, W * 0.92), (W * 0.96, W * 0.08)   # puntas de las hojas
+    _hilt(im, mid_a, mid_b, int(W * 0.11))
+    _glow_line(im, mid_a, tip_a, color, W * 0.062)
+    _glow_line(im, mid_b, tip_b, color2 or color, W * 0.062)
+    return _finish(im)
+
+
+def double_hilt_icon():
+    """Empunadura de doble hoja: una empunadura larga con un emisor apagado en cada extremo."""
+    im = Image.new('RGBA', (W, W), (0, 0, 0, 0))
+    end_a, end_b = (W * 0.08, W * 0.92), (W * 0.92, W * 0.08)
+    _hilt(im, end_a, end_b, int(W * 0.15))
+    d = ImageDraw.Draw(im)
+    for e in (end_a, end_b):
+        d.ellipse([e[0] - W * 0.09, e[1] - W * 0.09, e[0] + W * 0.09, e[1] + W * 0.09], fill=(120, 124, 132, 255))
+        d.ellipse([e[0] - W * 0.04, e[1] - W * 0.04, e[0] + W * 0.04, e[1] + W * 0.04], fill=(35, 35, 40, 255))
+    return _finish(im)
+
+
 def crystal_icon(color=(255, 30, 24)):
     im = Image.new('RGBA', (W, W), (0, 0, 0, 0))
     core, mid, edge = blade_colors(color)

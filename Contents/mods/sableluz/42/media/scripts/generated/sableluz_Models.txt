@@ -4,9 +4,88 @@ module SL
     {
         Base,
     }
+
     model SableLuz
     {
         mesh = weapons/2handed/SableLuz,
         texture = weapons/2handed/SableLuz,
+    }
+
+    model SableLuzDoble
+    {
+        mesh = weapons/2handed/SableLuzDoble,
+        texture = weapons/2handed/SableLuzDoble,
+    }
+
+    model SableLuz_Blue
+    {
+        mesh = weapons/2handed/SableLuz,
+        texture = weapons/2handed/SableLuz_Blue,
+    }
+
+    model SableLuzDoble_Blue
+    {
+        mesh = weapons/2handed/SableLuzDoble,
+        texture = weapons/2handed/SableLuzDoble_Blue,
+    }
+
+    model SableLuz_Green
+    {
+        mesh = weapons/2handed/SableLuz,
+        texture = weapons/2handed/SableLuz_Green,
+    }
+
+    model SableLuzDoble_Green
+    {
+        mesh = weapons/2handed/SableLuzDoble,
+        texture = weapons/2handed/SableLuzDoble_Green,
+    }
+
+    model SableLuz_Purple
+    {
+        mesh = weapons/2handed/SableLuz,
+        texture = weapons/2handed/SableLuz_Purple,
+    }
+
+    model SableLuzDoble_Purple
+    {
+        mesh = weapons/2handed/SableLuzDoble,
+        texture = weapons/2handed/SableLuzDoble_Purple,
+    }
+
+    model SableLuz_Yellow
+    {
+        mesh = weapons/2handed/SableLuz,
+        texture = weapons/2handed/SableLuz_Yellow,
+    }
+
+    model SableLuzDoble_Yellow
+    {
+        mesh = weapons/2handed/SableLuzDoble,
+        texture = weapons/2handed/SableLuzDoble_Yellow,
+    }
+
+    model SableLuz_Orange
+    {
+        mesh = weapons/2handed/SableLuz,
+        texture = weapons/2handed/SableLuz_Orange,
+    }
+
+    model SableLuzDoble_Orange
+    {
+        mesh = weapons/2handed/SableLuzDoble,
+        texture = weapons/2handed/SableLuzDoble_Orange,
+    }
+
+    model SableLuz_White
+    {
+        mesh = weapons/2handed/SableLuz,
+        texture = weapons/2handed/SableLuz_White,
+    }
+
+    model SableLuzDoble_White
+    {
+        mesh = weapons/2handed/SableLuzDoble,
+        texture = weapons/2handed/SableLuzDoble_White,
     }
 }

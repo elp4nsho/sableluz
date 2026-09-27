@@ -1,5 +1,25 @@
 {
-    "Tooltip_SL_SableLuz": "Brilla al empuñarlo. Se repara con baterías o chatarra electrónica.",
+    "Tooltip_SL_EmpunaduraSable": "Una empuñadura vacía. Le falta un cristal y energía para encenderse.",
+    "Tooltip_SL_EmpunaduraDobleSable": "Una empuñadura larga con un emisor en cada punta. Necesita dos cristales y energía.",
     "Tooltip_SL_CristalKyber": "Un cristal rojo, tibio, que zumba. El corazón de un sable de luz.",
-    "Tooltip_SL_EmpunaduraSable": "Una empuñadura vacía. Le falta un cristal y energía para encenderse."
+    "Tooltip_SL_SableLuz": "Brilla rojo al empuñarlo. Se repara con baterías o chatarra electrónica.",
+    "Tooltip_SL_SableLuzDoble": "Dos hojas rojo, una empuñadura. Más pesado y lento, pega a todo tu alrededor.",
+    "Tooltip_SL_CristalKyber_Blue": "Un cristal azul, tibio, que zumba. El corazón de un sable de luz.",
+    "Tooltip_SL_SableLuz_Blue": "Brilla azul al empuñarlo. Se repara con baterías o chatarra electrónica.",
+    "Tooltip_SL_SableLuzDoble_Blue": "Dos hojas azul, una empuñadura. Más pesado y lento, pega a todo tu alrededor.",
+    "Tooltip_SL_CristalKyber_Green": "Un cristal verde, tibio, que zumba. El corazón de un sable de luz.",
+    "Tooltip_SL_SableLuz_Green": "Brilla verde al empuñarlo. Se repara con baterías o chatarra electrónica.",
+    "Tooltip_SL_SableLuzDoble_Green": "Dos hojas verde, una empuñadura. Más pesado y lento, pega a todo tu alrededor.",
+    "Tooltip_SL_CristalKyber_Purple": "Un cristal púrpura, tibio, que zumba. El corazón de un sable de luz.",
+    "Tooltip_SL_SableLuz_Purple": "Brilla púrpura al empuñarlo. Se repara con baterías o chatarra electrónica.",
+    "Tooltip_SL_SableLuzDoble_Purple": "Dos hojas púrpura, una empuñadura. Más pesado y lento, pega a todo tu alrededor.",
+    "Tooltip_SL_CristalKyber_Yellow": "Un cristal amarillo, tibio, que zumba. El corazón de un sable de luz.",
+    "Tooltip_SL_SableLuz_Yellow": "Brilla amarillo al empuñarlo. Se repara con baterías o chatarra electrónica.",
+    "Tooltip_SL_SableLuzDoble_Yellow": "Dos hojas amarillo, una empuñadura. Más pesado y lento, pega a todo tu alrededor.",
+    "Tooltip_SL_CristalKyber_Orange": "Un cristal naranja, tibio, que zumba. El corazón de un sable de luz.",
+    "Tooltip_SL_SableLuz_Orange": "Brilla naranja al empuñarlo. Se repara con baterías o chatarra electrónica.",
+    "Tooltip_SL_SableLuzDoble_Orange": "Dos hojas naranja, una empuñadura. Más pesado y lento, pega a todo tu alrededor.",
+    "Tooltip_SL_CristalKyber_White": "Un cristal blanco, tibio, que zumba. El corazón de un sable de luz.",
+    "Tooltip_SL_SableLuz_White": "Brilla blanco al empuñarlo. Se repara con baterías o chatarra electrónica.",
+    "Tooltip_SL_SableLuzDoble_White": "Dos hojas blanco, una empuñadura. Más pesado y lento, pega a todo tu alrededor."
 }

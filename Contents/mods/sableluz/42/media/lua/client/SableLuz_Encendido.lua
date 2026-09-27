@@ -1,22 +1,37 @@
 -- Sable de Luz encendido: mientras alguien lo tiene en la mano
---   * ilumina con su color alrededor (una luz de cell que lo sigue casilla a casilla)
+--   * ilumina con el color de SU cristal alrededor (una luz de cell que lo sigue casilla a casilla)
 --   * zumba (loop) y suena al encenderse / apagarse
 -- Generado por build_sableluz.py.
 
-local SABER = "SL.SableLuz"
-local R, G, B = 1.00, 0.16, 0.10
-local RADIUS = 4
+-- fulltype -> color/alcance de la luz. Cubre todos los colores y los dos largos de sable.
+local SABERS = {
+    ["SL.SableLuz"] = { r=1.00, g=0.12, b=0.09, radius=4 },
+    ["SL.SableLuzDoble"] = { r=1.00, g=0.12, b=0.09, radius=5 },
+    ["SL.SableLuz_Blue"] = { r=0.24, g=0.55, b=1.00, radius=4 },
+    ["SL.SableLuzDoble_Blue"] = { r=0.24, g=0.55, b=1.00, radius=5 },
+    ["SL.SableLuz_Green"] = { r=0.24, g=0.82, b=0.35, radius=4 },
+    ["SL.SableLuzDoble_Green"] = { r=0.24, g=0.82, b=0.35, radius=5 },
+    ["SL.SableLuz_Purple"] = { r=0.67, g=0.31, b=0.92, radius=4 },
+    ["SL.SableLuzDoble_Purple"] = { r=0.67, g=0.31, b=0.92, radius=5 },
+    ["SL.SableLuz_Yellow"] = { r=0.98, g=0.80, b=0.16, radius=4 },
+    ["SL.SableLuzDoble_Yellow"] = { r=0.98, g=0.80, b=0.16, radius=5 },
+    ["SL.SableLuz_Orange"] = { r=1.00, g=0.55, b=0.16, radius=4 },
+    ["SL.SableLuzDoble_Orange"] = { r=1.00, g=0.55, b=0.16, radius=5 },
+    ["SL.SableLuz_White"] = { r=0.92, g=0.92, b=0.94, radius=4 },
+    ["SL.SableLuzDoble_White"] = { r=0.92, g=0.92, b=0.94, radius=5 },
+}
 
-local state = {}      -- jugador -> { light, x, y, z, hum }
+local state = {}      -- jugador -> { light, x, y, z, hum, col }
 
-local function isSaber(item)
-    return item and item:getFullType() == SABER and item:getCondition() > 0
+local function saberColor(item)
+    if not item or item:getCondition() <= 0 then return nil end
+    return SABERS[item:getFullType()]
 end
 
-local function holding(player)
-    if not player or player:isDead() then return false end
+local function heldColor(player)
+    if not player or player:isDead() then return nil end
     -- ojo: ipairs({a, b}) se corta en el primer nil; se revisan las dos manos por separado
-    return isSaber(player:getPrimaryHandItem()) or isSaber(player:getSecondaryHandItem())
+    return saberColor(player:getPrimaryHandItem()) or saberColor(player:getSecondaryHandItem())
 end
 
 local function emitter(player)
@@ -51,7 +66,8 @@ end
 
 local function update(player)
     local d = state[player]
-    if not holding(player) then
+    local col = heldColor(player)
+    if not col then
         if d then switchOff(player, d, not player:isDead()) end
         return
     end
@@ -60,12 +76,12 @@ local function update(player)
         state[player] = d
         play(player, "SableLuzOn")
     end
-    -- luz: se mueve cuando cambia la casilla
+    -- luz: se mueve cuando cambia la casilla, o se vuelve a crear si cambio el color del cristal
     local x, y, z = math.floor(player:getX()), math.floor(player:getY()), math.floor(player:getZ())
-    if not d.light or d.x ~= x or d.y ~= y or d.z ~= z then
+    if not d.light or d.x ~= x or d.y ~= y or d.z ~= z or d.col ~= col then
         removeLight(d)
-        local ok, light = pcall(function() return getCell():addLamppost(x, y, z, R, G, B, RADIUS) end)
-        if ok and light then d.light, d.x, d.y, d.z = light, x, y, z end
+        local ok, light = pcall(function() return getCell():addLamppost(x, y, z, col.r, col.g, col.b, col.radius) end)
+        if ok and light then d.light, d.x, d.y, d.z, d.col = light, x, y, z, col end
     end
     -- zumbido: si termino (o el juego no lo repite solo), se vuelve a lanzar
     local e = emitter(player)

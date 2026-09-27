@@ -22,15 +22,43 @@ module SL
             item 2 [Base.ElectronicsScrap],
             item 1 [Base.ElectricWire],
             item 1 [Base.DuctTape],
+
         }
 
         outputs
         {
             item 1 SL.EmpunaduraSable,
+
         }
     }
 
-    /* 2) Sable: empunadura + cristal + dos baterias para encenderlo. */
+    /* 1b) Empunadura doble: se sueldan dos empunaduras por el centro con un tubo mas y cinta. */
+    craftRecipe SLArmarEmpunaduraDoble
+    {
+        timedAction = MakingElectrical,
+        time = 400,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:3,
+        xpAward = Electricity:25,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 2 [SL.EmpunaduraSable] mode:destroy,
+            item 1 [Base.MetalPipe],
+            item 2 [Base.DuctTape],
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraDobleSable,
+
+        }
+    }
+
+    /* Sable (Rojo): empunadura + cristal + dos baterias para encenderlo. */
     craftRecipe SLEnsamblarSable
     {
         timedAction = MakingElectrical,
@@ -44,17 +72,19 @@ module SL
         {
             item 1 tags[base:screwdriver] mode:keep,
             item 1 [SL.EmpunaduraSable],
-            item 1 [SL.CristalKyber],
+            item 1 [CristalKyber],
             item 2 [Base.Battery] mode:destroy,
+
         }
 
         outputs
         {
-            item 1 SL.SableLuz,
+            item 1 SableLuz,
+
         }
     }
 
-    /* 3) Desarmar: recuperar la empunadura y el cristal (para cambiar de cristal/color). */
+    /* Desarmar (Rojo): recuperar la empunadura y el cristal. */
     craftRecipe SLDesarmarSable
     {
         timedAction = MakingElectrical,
@@ -67,13 +97,678 @@ module SL
         inputs
         {
             item 1 tags[base:screwdriver] mode:keep,
-            item 1 [SL.SableLuz] mode:destroy,
+            item 1 [SableLuz] mode:destroy,
+
         }
 
         outputs
         {
             item 1 SL.EmpunaduraSable,
-            item 1 SL.CristalKyber,
+            item 1 CristalKyber,
+
+        }
+    }
+
+    /* Sable de doble hoja (Rojo): empunadura doble + dos cristales + cuatro baterias. */
+    craftRecipe SLEnsamblarSableDoble
+    {
+        timedAction = MakingElectrical,
+        time = 500,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:4,
+        xpAward = Electricity:45,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraDobleSable],
+            item 2 [CristalKyber],
+            item 4 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuzDoble,
+
+        }
+    }
+
+    /* Desarmar la doble hoja (Rojo). */
+    craftRecipe SLDesarmarSableDoble
+    {
+        timedAction = MakingElectrical,
+        time = 250,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:2,
+        xpAward = Electricity:8,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuzDoble] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraDobleSable,
+            item 2 CristalKyber,
+
+        }
+    }
+
+    /* Sable (Azul): empunadura + cristal + dos baterias para encenderlo. */
+    craftRecipe SLEnsamblarSable_Blue
+    {
+        timedAction = MakingElectrical,
+        time = 400,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:3,
+        xpAward = Electricity:30,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraSable],
+            item 1 [CristalKyber_Blue],
+            item 2 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuz_Blue,
+
+        }
+    }
+
+    /* Desarmar (Azul): recuperar la empunadura y el cristal. */
+    craftRecipe SLDesarmarSable_Blue
+    {
+        timedAction = MakingElectrical,
+        time = 200,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:1,
+        xpAward = Electricity:5,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuz_Blue] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraSable,
+            item 1 CristalKyber_Blue,
+
+        }
+    }
+
+    /* Sable de doble hoja (Azul): empunadura doble + dos cristales + cuatro baterias. */
+    craftRecipe SLEnsamblarSableDoble_Blue
+    {
+        timedAction = MakingElectrical,
+        time = 500,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:4,
+        xpAward = Electricity:45,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraDobleSable],
+            item 2 [CristalKyber_Blue],
+            item 4 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuzDoble_Blue,
+
+        }
+    }
+
+    /* Desarmar la doble hoja (Azul). */
+    craftRecipe SLDesarmarSableDoble_Blue
+    {
+        timedAction = MakingElectrical,
+        time = 250,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:2,
+        xpAward = Electricity:8,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuzDoble_Blue] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraDobleSable,
+            item 2 CristalKyber_Blue,
+
+        }
+    }
+
+    /* Sable (Verde): empunadura + cristal + dos baterias para encenderlo. */
+    craftRecipe SLEnsamblarSable_Green
+    {
+        timedAction = MakingElectrical,
+        time = 400,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:3,
+        xpAward = Electricity:30,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraSable],
+            item 1 [CristalKyber_Green],
+            item 2 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuz_Green,
+
+        }
+    }
+
+    /* Desarmar (Verde): recuperar la empunadura y el cristal. */
+    craftRecipe SLDesarmarSable_Green
+    {
+        timedAction = MakingElectrical,
+        time = 200,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:1,
+        xpAward = Electricity:5,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuz_Green] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraSable,
+            item 1 CristalKyber_Green,
+
+        }
+    }
+
+    /* Sable de doble hoja (Verde): empunadura doble + dos cristales + cuatro baterias. */
+    craftRecipe SLEnsamblarSableDoble_Green
+    {
+        timedAction = MakingElectrical,
+        time = 500,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:4,
+        xpAward = Electricity:45,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraDobleSable],
+            item 2 [CristalKyber_Green],
+            item 4 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuzDoble_Green,
+
+        }
+    }
+
+    /* Desarmar la doble hoja (Verde). */
+    craftRecipe SLDesarmarSableDoble_Green
+    {
+        timedAction = MakingElectrical,
+        time = 250,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:2,
+        xpAward = Electricity:8,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuzDoble_Green] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraDobleSable,
+            item 2 CristalKyber_Green,
+
+        }
+    }
+
+    /* Sable (Púrpura): empunadura + cristal + dos baterias para encenderlo. */
+    craftRecipe SLEnsamblarSable_Purple
+    {
+        timedAction = MakingElectrical,
+        time = 400,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:3,
+        xpAward = Electricity:30,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraSable],
+            item 1 [CristalKyber_Purple],
+            item 2 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuz_Purple,
+
+        }
+    }
+
+    /* Desarmar (Púrpura): recuperar la empunadura y el cristal. */
+    craftRecipe SLDesarmarSable_Purple
+    {
+        timedAction = MakingElectrical,
+        time = 200,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:1,
+        xpAward = Electricity:5,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuz_Purple] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraSable,
+            item 1 CristalKyber_Purple,
+
+        }
+    }
+
+    /* Sable de doble hoja (Púrpura): empunadura doble + dos cristales + cuatro baterias. */
+    craftRecipe SLEnsamblarSableDoble_Purple
+    {
+        timedAction = MakingElectrical,
+        time = 500,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:4,
+        xpAward = Electricity:45,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraDobleSable],
+            item 2 [CristalKyber_Purple],
+            item 4 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuzDoble_Purple,
+
+        }
+    }
+
+    /* Desarmar la doble hoja (Púrpura). */
+    craftRecipe SLDesarmarSableDoble_Purple
+    {
+        timedAction = MakingElectrical,
+        time = 250,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:2,
+        xpAward = Electricity:8,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuzDoble_Purple] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraDobleSable,
+            item 2 CristalKyber_Purple,
+
+        }
+    }
+
+    /* Sable (Amarillo): empunadura + cristal + dos baterias para encenderlo. */
+    craftRecipe SLEnsamblarSable_Yellow
+    {
+        timedAction = MakingElectrical,
+        time = 400,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:3,
+        xpAward = Electricity:30,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraSable],
+            item 1 [CristalKyber_Yellow],
+            item 2 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuz_Yellow,
+
+        }
+    }
+
+    /* Desarmar (Amarillo): recuperar la empunadura y el cristal. */
+    craftRecipe SLDesarmarSable_Yellow
+    {
+        timedAction = MakingElectrical,
+        time = 200,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:1,
+        xpAward = Electricity:5,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuz_Yellow] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraSable,
+            item 1 CristalKyber_Yellow,
+
+        }
+    }
+
+    /* Sable de doble hoja (Amarillo): empunadura doble + dos cristales + cuatro baterias. */
+    craftRecipe SLEnsamblarSableDoble_Yellow
+    {
+        timedAction = MakingElectrical,
+        time = 500,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:4,
+        xpAward = Electricity:45,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraDobleSable],
+            item 2 [CristalKyber_Yellow],
+            item 4 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuzDoble_Yellow,
+
+        }
+    }
+
+    /* Desarmar la doble hoja (Amarillo). */
+    craftRecipe SLDesarmarSableDoble_Yellow
+    {
+        timedAction = MakingElectrical,
+        time = 250,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:2,
+        xpAward = Electricity:8,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuzDoble_Yellow] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraDobleSable,
+            item 2 CristalKyber_Yellow,
+
+        }
+    }
+
+    /* Sable (Naranja): empunadura + cristal + dos baterias para encenderlo. */
+    craftRecipe SLEnsamblarSable_Orange
+    {
+        timedAction = MakingElectrical,
+        time = 400,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:3,
+        xpAward = Electricity:30,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraSable],
+            item 1 [CristalKyber_Orange],
+            item 2 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuz_Orange,
+
+        }
+    }
+
+    /* Desarmar (Naranja): recuperar la empunadura y el cristal. */
+    craftRecipe SLDesarmarSable_Orange
+    {
+        timedAction = MakingElectrical,
+        time = 200,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:1,
+        xpAward = Electricity:5,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuz_Orange] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraSable,
+            item 1 CristalKyber_Orange,
+
+        }
+    }
+
+    /* Sable de doble hoja (Naranja): empunadura doble + dos cristales + cuatro baterias. */
+    craftRecipe SLEnsamblarSableDoble_Orange
+    {
+        timedAction = MakingElectrical,
+        time = 500,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:4,
+        xpAward = Electricity:45,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraDobleSable],
+            item 2 [CristalKyber_Orange],
+            item 4 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuzDoble_Orange,
+
+        }
+    }
+
+    /* Desarmar la doble hoja (Naranja). */
+    craftRecipe SLDesarmarSableDoble_Orange
+    {
+        timedAction = MakingElectrical,
+        time = 250,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:2,
+        xpAward = Electricity:8,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuzDoble_Orange] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraDobleSable,
+            item 2 CristalKyber_Orange,
+
+        }
+    }
+
+    /* Sable (Blanco): empunadura + cristal + dos baterias para encenderlo. */
+    craftRecipe SLEnsamblarSable_White
+    {
+        timedAction = MakingElectrical,
+        time = 400,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:3,
+        xpAward = Electricity:30,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraSable],
+            item 1 [CristalKyber_White],
+            item 2 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuz_White,
+
+        }
+    }
+
+    /* Desarmar (Blanco): recuperar la empunadura y el cristal. */
+    craftRecipe SLDesarmarSable_White
+    {
+        timedAction = MakingElectrical,
+        time = 200,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:1,
+        xpAward = Electricity:5,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuz_White] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraSable,
+            item 1 CristalKyber_White,
+
+        }
+    }
+
+    /* Sable de doble hoja (Blanco): empunadura doble + dos cristales + cuatro baterias. */
+    craftRecipe SLEnsamblarSableDoble_White
+    {
+        timedAction = MakingElectrical,
+        time = 500,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:4,
+        xpAward = Electricity:45,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SL.EmpunaduraDobleSable],
+            item 2 [CristalKyber_White],
+            item 4 [Base.Battery] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SableLuzDoble_White,
+
+        }
+    }
+
+    /* Desarmar la doble hoja (Blanco). */
+    craftRecipe SLDesarmarSableDoble_White
+    {
+        timedAction = MakingElectrical,
+        time = 250,
+        Tags = AnySurfaceCraft,
+        category = Electrical,
+        SkillRequired = Electricity:2,
+        xpAward = Electricity:8,
+
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 [SableLuzDoble_White] mode:destroy,
+
+        }
+
+        outputs
+        {
+            item 1 SL.EmpunaduraDobleSable,
+            item 2 CristalKyber_White,
+
         }
     }
 }
